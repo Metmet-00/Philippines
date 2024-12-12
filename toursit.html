@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tourist spots</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #f4f4f4;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, #1e90ff, #000000 70%);
+            animation: backgroundPulse 10s infinite alternate;
+            z-index: -1;
+        }
+
+        @keyframes backgroundPulse {
+            0% {
+                background: radial-gradient(circle at 50% 50%, #1e90ff, #000000 70%);
+            }
+            100% {
+                background: radial-gradient(circle at 50% 50%, #ff5733, #000000 70%);
+            }
+        }
+
+        header {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #1e90ff, #ff5733);
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            position: relative;
+            border-left: 10px solid #ff5733;
+            border-right: 10px solid #ff5733;
+        }
+
+        nav {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            font-family: 'Poppins', sans-serif;
+            color: #f4f4f4;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            background-color: rgba(0, 0, 0, 0.4);
+            transition: color 0.3s, transform 0.3s, background-color 0.3s;
+        }
+
+        nav a:hover {
+            color: #00ffff;
+            transform: scale(1.1);
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        #hero {
+            position: relative;
+            background-image: url('Philippinesview.jpg');  
+            background-size: cover;
+            background-position: center;
+            height: 80vh;
+            color: white;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-family: 'Poppins', sans-serif;
+            padding: 20px;
+        }
+
+        #hero h1 {
+            font-size: 4em;
+            font-weight: 600;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+        }
+
+        #hero p {
+            font-size: 1.5em;
+            text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.6);
+            margin-top: 20px;
+        }
+
+        #brochure {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 40px;
+            gap: 30px;
+            background: radial-gradient(circle at 50% 50%, #333333, #000000); 
+            position: relative;
+            animation: glowingBackground 15s infinite alternate;
+            border: 5px solid #ff5733; 
+            border-radius: 20px;
+            margin-top: 50px;
+        }
+
+        @keyframes glowingBackground {
+            0% {
+                background: radial-gradient(circle at 50% 50%, #333333, #000000);
+            }
+            100% {
+                background: radial-gradient(circle at 50% 50%, #1e90ff, #000000);
+            }
+        }
+
+        .destination {
+            width: 30%;
+            background-color: #222;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            transform: scale(1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            text-align: left;
+            padding: 20px;
+        }
+
+        .destination:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .destination.selected {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.5);
+            background-color: #444;
+        }
+
+        .destination img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        .destination h3 {
+            color: #00ffff;
+            font-family: 'Poppins', sans-serif;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .destination p {
+            margin: 20px;
+            font-size: 0.9em;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        #about {
+            padding: 40px 30px;
+            background-color: #111;
+            color: #f4f4f4;
+            text-align: center;
+            border: 5px solid #ff5733;
+            border-radius: 20px;
+            margin-top: 50px;
+        }
+
+        #about h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5em;
+            color: #ff5733;
+            margin-bottom: 20px;
+        }
+
+        #about p {
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .staff-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .staff-member {
+            border: 1px solid gold;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: gold;
+            width: 200px;
+            text-align: center;
+        }
+
+        .staff-member img {
+            width: 100%;
+            border-radius: 15px;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        #earth-logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 120px;
+            height: 120px;
+            background-image: url('Pil.png');  
+            background-size: cover;
+            background-position: center;
+            border-radius: 50%;
+            animation: spin 10s infinite linear;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div id="earth-logo"></div>
+        <h1>Explore the Philippines</h1>
+        <p>Your guide to the most breathtaking destinations</p>
+    </header>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#brochure">Destinations</a>
+        <a href="#about">About Us</a>
+    </nav>
+
+    <section id="hero">
+        <h1>Discover the Philippines</h1>
+        <p>Explore pristine beaches, stunning landscapes, and vibrant culture.</p>
+    </section>
+
+    <section id="brochure">
+        <div class="destination" onclick="selectDestination(this)">
+            <img src="boracay.jpg" alt="Boracay">
+            <h3>Boracay</h3>
+            <p>Famous for its white sand beaches and vibrant nightlife.</p>
+        </div>
+        <div class="destination" onclick="selectDestination(this)">
+            <img src="palawan.jpg" alt="Palawan">
+            <h3>Palawan</h3>
+            <p>Known for its crystal-clear waters and stunning lagoons.</p>
+        </div>
+        <div class="destination" onclick="selectDestination(this)">
+            <img src="choco.jpg" alt="Chocolate Hills">
+            <h3>Chocolate Hills</h3>
+            <p>Unique geological formations located in Bohol.</p>
+        </div>
+        <div class="destination" onclick="selectDestination(this)">
+            <img src="mayo.jpg" alt="Mayon Volcano">
+            <h3>Mayon Volcano</h3>
+            <p>Famous for its perfect conical shape.</p>
+        </div>
+        <div class="destination" onclick="selectDestination(this)">
+            <img src="taal.jpg" alt="Taal Volcano">
+            <h3>Taal Volcano</h3>
+            <p>An active volcano located on an island in a lake.</p>
+        </div>
+        <div class="destination" onclick="selectDestination(this)">
+            <img src="vigan.jpg" alt="Vigan">
+            <h3>Vigan</h3>
+            <p>Famous for its preserved Spanish colonial architecture.</p>
+        </div>
+        <div class="destination" onclick="selectDestination(this)">
+            <img src="falls.jpg" alt="Pagsanjan Falls">
+            <h3>Pagsanjan Falls</h3>
+            <p>A breathtaking waterfall that can be accessed by boat.</p>
+        </div>
+        <div class="destination" onclick="selectDestination(this)">
+            <img src="madre.jpg" alt="Sierra Madre">
+            <h3>Sierra Madre</h3>
+            <p>A mountain range with rich biodiversity and scenic views.</p>
+        </div>
+        <div class="destination" onclick="selectDestination(this)">
+            <img src="rice.jpg" alt="Banaue Rice Terraces">
+            <h3>Banaue Rice Terraces</h3>
+            <p>Ancient terraces that are a UNESCO World Heritage site.</p>
+        </div>
+        <div class="destination" onclick="selectDestination(this)">
+            <img src="taaltown.jpg" alt="Taal Heritage Town">
+            <h3>Taal Heritage Town</h3>
+            <p>Known for its beautiful Spanish-era structures.</p>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2>About Us</h2>
+        <p>At Tourism Paradise, we are passionate about showcasing the beauty of the Philippines. Join us on this journey to explore pristine beaches, rich history, and vibrant culture.</p>
+        
+        <h2>Our Staff</h2>
+        <p>The Pair that did it all </p>
+        <div class="staff-container">
+            <div class="staff-member">
+                <img src="gwyneth.jpg" alt="Gwyneth">
+                <h3>Gwyneth Handag</h3>
+                
+            </div>
+            <div class="staff-member">
+                <img src="met.jpg" alt="Met">
+                <h3>Metodio Gomez</h3>
+                
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function selectDestination(destination) {
+            const allDestinations = document.querySelectorAll('.destination');
+            allDestinations.forEach(function (dest) {
+                dest.classList.remove('selected');
+            });
+            destination.classList.add('selected');
+        }
+    </script>
+
+</body>
+</html>
